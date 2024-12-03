@@ -1,0 +1,26 @@
+<!-- DO NOT MODIFY THIS FILE -->
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Remove Applicants</title>
+</head>
+
+<body>
+	<h1>Removing All Applicants</h1>
+	<form action=<%- postUrl %> method="post">
+		<input type="submit" value="Remove all applicants">
+	</form>
+	<hr>
+	<a href=<%- homeUrl %>>HOME</a>
+
+    <script>
+		window.onsubmit = () => {
+			let msg = "Are you sure you want to remove all applications?";
+			return window.confirm(msg);
+		};
+	</script>
+</body>
+
+</html>
