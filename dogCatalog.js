@@ -53,8 +53,6 @@ async function insertApp(name, email, gpa, bgInfo) {
 }
 async function insertAppHelper(client, databaseAndCollection, newApp) {
     const result = await client.db(databaseAndCollection.db).collection(databaseAndCollection.collection).insertOne(newApp);
-
-    // console.log(`App entry created with id ${result.insertedId}`);
 }
 
 /* For the Review Application pages */
@@ -65,26 +63,21 @@ async function lookUpOneEntry(appEmail) {
                         .findOne(filter);
 
     return result;
-//    if (result) {
-//        console.log(result);
-//    } else {
-//        console.log(`No email found with address ${appEmail}`);
-//    }
 }
 
 /* For the select GPA pages */
-async function lookUpMany(givenGpa) {
-    let filter = {gpa : { $gte: givenGpa}}; // >= (gpa: givenGpa)
-    const cursor = client.db(databaseAndCollection.db)
-    .collection(databaseAndCollection.collection)
-    .find(filter);
+// async function lookUpMany(givenGpa) {
+//     let filter = {gpa : { $gte: givenGpa}}; // >= (gpa: givenGpa)
+//     const cursor = client.db(databaseAndCollection.db)
+//     .collection(databaseAndCollection.collection)
+//     .find(filter);
 
-    // Some Additional comparison query operators: $eq, $gt, $lt, $lte, $ne (not equal)
-    // Full listing at https://www.mongodb.com/docs/manual/reference/operator/query-comparison/
-    const result = await cursor.toArray();
-    return result;
-    // console.log(result);
-}
+//     // Some Additional comparison query operators: $eq, $gt, $lt, $lte, $ne (not equal)
+//     // Full listing at https://www.mongodb.com/docs/manual/reference/operator/query-comparison/
+//     const result = await cursor.toArray();
+//     return result;
+//     // console.log(result);
+// }
 
 /* For the Remove All pages */
 async function removeAll() {
@@ -115,16 +108,16 @@ app.get("/", (request, response) => {
 });
 
 /* The following two endpoints handle the Application pages */
-app.get("/catalog", (request, response) => { 
+app.get("/adoption", (request, response) => { 
 	/* You implement */ 
     const variables = {
-        postUrl: localUrl + "/addToCart",
+        postUrl: localUrl + "/adoptionSuccess",
         homeUrl: "\"" + localUrl + "\"",
     };
 
-    response.render("catalog", variables);
+    response.render("adoption", variables);
 });
-app.post("/addToCart", (request, response) => { 
+app.post("/adoptionSuccess", (request, response) => { 
     /* Notice how we are extracting the values from request.body */
     let {name, email, gpa, bgInfo} =  request.body;
     let statusCode = 200; // success!
@@ -144,13 +137,13 @@ app.post("/addToCart", (request, response) => {
 });
 
 /* The following two endpoints handle the Review Application pages */
-app.get("/cart", (request, response) => {
+app.get("/backyard", (request, response) => {
     const variables = {
         postUrl: localUrl + "/processPurchase",
         homeUrl: "\"" + localUrl + "\"",
     };
 
-    response.render("cart", variables);
+    response.render("backyard", variables);
 });
 app.post("/processPurchase", (request, response) => { 
     /* Notice how we are extracting the values from request.body */
@@ -196,78 +189,16 @@ app.post("/processPurchase", (request, response) => {
     main();
 });
 
-/* The following two endpoints handle the 'Select by GPA' pages */
-app.get("/adminBreed", (request, response) => {
-    const variables = {
-        postUrl: localUrl + "/processAdminBreed",
-        homeUrl: "\"" + localUrl + "\"",
-    };
-
-    response.render("selectGpa", variables);
-});
-app.post("/processAdminBreed", (request, response) => { 
-    /* Notice how we are extracting the values from request.body */
-    let reqGpa =  request.body.gpa;
-    // let {name, email, bgInfo} = ; // MongoDB stuff
-    let statusCode = 200; // success!
-
-    //MongoDB function!!
-    async function main() {
-        await client.connect();
-
-        try {
-            let result = await lookUpMany(reqGpa);
-            // console.log(result);
-
-            if (result.length == 0) {
-                let answer = "<h1>Display GFAs Greater than or Equal to</h1><br><br>";
-                answer += "<b>NONE<b><br><br>";
-                answer += "<a href=\"" + localUrl + "\">HOME</a>";
-        
-                response.writeHead(statusCode, {"Content-type": "text/html"});
-                response.end(answer);
-            } else {
-                let table = "<table border='1'><thead><tr><th>Name</th><th>GPA</th></tr></thead>";
-                let tableBody = "<tbody>";
-                result.forEach(element => {
-                    tableBody += "<tr><td>"+element.name+"</td><td>"+element.gpa+"</td></tr>";
-                });
-                tableBody += "</tbody></table><br><br>"
-        
-                let answer = "<h1>Display GFAs Greater than or Equal to</h1><br><br>";
-                answer += table;
-                answer += tableBody;
-                answer += "<a href=\"" + localUrl + "\">HOME</a>";
-        
-                response.writeHead(statusCode, {"Content-type": "text/html"});
-                response.end(answer);
-            }
-        } catch (e) {
-            console.error(e);
-
-            let answer = "<h1>Display GFAs Greater than or Equal to</h1><br><br>";
-            answer += "<b>NONE<b><br><br>";
-            answer += "<a href=\"" + localUrl + "\">HOME</a>";
-    
-            response.writeHead(statusCode, {"Content-type": "text/html"});
-            response.end(answer);
-        } finally {
-            await client.close();
-        }
-    }
-    main();
-});
-
 /* The following two endpoints handle the 'Remove Applicants' pages */
-app.get("/adminRemove", (request, response) => {
+app.get("/returnDog", (request, response) => {
     const variables = {
-        postUrl: localUrl + "/processAdminRemove",
+        postUrl: localUrl + "/processReturnDog",
         homeUrl: "\"" + localUrl + "\"",
     };
 
-    response.render("removeApp", variables);
+    response.render("returnDog", variables);
 });
-app.post("/processAdminRemove", (request, response) => { 
+app.post("/processReturnDog", (request, response) => { 
     async function main() { 
         
         let numberRemoved = await removeAll(); // no need for client.connect() because it's in removeAll()
