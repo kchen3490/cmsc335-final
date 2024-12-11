@@ -1,10 +1,9 @@
 /**
- * Project 5 created by Kai C., 11/24/2024
+ * FINAL CMSC 335 PROJECT
  */
 
 "use strict";
 
-const fs = require("fs");
 const path = require("path");
 const express = require("express");   /* Accessing express module */
 const app = express();  /* app is a request handler function */
@@ -30,7 +29,7 @@ require("dotenv").config({ path: path.resolve(__dirname, 'credentialsDontPost/.e
 const uri = process.env.MONGO_CONNECTION_STRING;
 
 /* Our database and collection */
-const databaseAndCollection = {db: "CMSC335DB", collection:"campApplicants"};
+const databaseAndCollection = {db: "CMSC335DB", collection:"dogPhotos"};
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
@@ -116,16 +115,16 @@ app.get("/", (request, response) => {
 });
 
 /* The following two endpoints handle the Application pages */
-app.get("/apply", (request, response) => { 
+app.get("/catalog", (request, response) => { 
 	/* You implement */ 
     const variables = {
-        postUrl: localUrl + "/processApplication",
+        postUrl: localUrl + "/addToCart",
         homeUrl: "\"" + localUrl + "\"",
     };
 
-    response.render("application", variables);
+    response.render("catalog", variables);
 });
-app.post("/processApplication", (request, response) => { 
+app.post("/addToCart", (request, response) => { 
     /* Notice how we are extracting the values from request.body */
     let {name, email, gpa, bgInfo} =  request.body;
     let statusCode = 200; // success!
@@ -145,15 +144,15 @@ app.post("/processApplication", (request, response) => {
 });
 
 /* The following two endpoints handle the Review Application pages */
-app.get("/reviewApplication", (request, response) => {
+app.get("/cart", (request, response) => {
     const variables = {
-        postUrl: localUrl + "/processReviewApplication",
+        postUrl: localUrl + "/processPurchase",
         homeUrl: "\"" + localUrl + "\"",
     };
 
-    response.render("reviewApp", variables);
+    response.render("cart", variables);
 });
-app.post("/processReviewApplication", (request, response) => { 
+app.post("/processPurchase", (request, response) => { 
     /* Notice how we are extracting the values from request.body */
     let reqEmail =  request.body.email;
     let statusCode = 200; // success!
@@ -198,15 +197,15 @@ app.post("/processReviewApplication", (request, response) => {
 });
 
 /* The following two endpoints handle the 'Select by GPA' pages */
-app.get("/adminGFA", (request, response) => {
+app.get("/adminBreed", (request, response) => {
     const variables = {
-        postUrl: localUrl + "/processAdminGFA",
+        postUrl: localUrl + "/processAdminBreed",
         homeUrl: "\"" + localUrl + "\"",
     };
 
     response.render("selectGpa", variables);
 });
-app.post("/processAdminGFA", (request, response) => { 
+app.post("/processAdminBreed", (request, response) => { 
     /* Notice how we are extracting the values from request.body */
     let reqGpa =  request.body.gpa;
     // let {name, email, bgInfo} = ; // MongoDB stuff
@@ -293,7 +292,7 @@ process.stdin.setEncoding("utf8");
 
 /* Command Prompt - stops if incorrect num of arguments */
 if (process.argv.length != 3) {
-  process.stdout.write(`Usage supermarketServer.js jsonFile`);
+  process.stdout.write(`Usage dogCatalog.js`);
   process.exit(1);
 }
 
