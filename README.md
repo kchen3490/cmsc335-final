@@ -13,7 +13,7 @@ Lindsey Song (directory id: superterp), Kai Chen (kaiichen)
 [YouTube Link](https://youtu.be/dQw4w9WgXcQ)
 
 ### APIs 
-VideoApp (http:notrealvideoapp.what), SoundApp (http:notreadlsoundapp.what)
+DogAPI (https://dog.ceo/dog-api/)
 
 ### Contact Email:
 
