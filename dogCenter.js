@@ -107,6 +107,14 @@ app.get("/", (request, response) => {
     response.render("index");
 });
 
+app.get("/register", (request, response) => {
+    const variables = {
+        postUrl: localUrl + "/registerSuccess",
+        homeUrl: localUrl,
+    };
+    response.render("register", variables);
+});
+
 /* The following two endpoints handle the Application pages */
 app.get("/adoption", (request, response) => { 
 	/* You implement */ 
@@ -139,7 +147,7 @@ app.post("/adoptionSuccess", (request, response) => {
 /* The following two endpoints handle the Review Application pages */
 app.get("/backyard", (request, response) => {
     const variables = {
-        postUrl: localUrl + "/processPurchase",
+        postUrl: localUrl + "/yourBackyard",
         homeUrl: localUrl,
     };
 
