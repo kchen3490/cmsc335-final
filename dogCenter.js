@@ -42,7 +42,7 @@ async function insertApp(name, email, age, addInfo) {
        
         /* Inserting one app */
         // console.log("***** Inserting one app *****");
-        let newApp = {name: name, email: email, age: age, addInfo, addInfo};
+        let newApp = {name: name, email: email, age: age, addInfo: addInfo, dogs: []};
         await insertAppHelper(client, databaseAndCollection, newApp);
 
     } catch (e) {
@@ -137,10 +137,12 @@ app.get("/adoption", (request, response) => {
 });
 app.post("/adoptionSuccess", (request, response) => { 
     /* Notice how we are extracting the values from request.body */
-    let {name, email, gpa, bgInfo} =  request.body;
+    let name =  request.body;
     //let statusCode = 200; // success!
 
-    insertApp(name, email, gpa, bgInfo).catch(console.error); // MongoDB funtion!!
+    //Add code to get the dog image and add that image to the array of the user
+    
+    //insertApp(name, email, gpa, bgInfo).catch(console.error); // MongoDB funtion!!
 
     /*let answer = "<h1>Applicants Data</h1>";
     answer += "<b>Name: </b>&nbsp" + name + "<br>";
