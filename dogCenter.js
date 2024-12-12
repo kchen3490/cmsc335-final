@@ -206,10 +206,9 @@ app.post("/yourBackyard", (request, response) => {
             let images = "";
             let count = 1;
             dogs.forEach((entry) => {
-                images += `<img src=${entry} alt="dog${count}><br>`;
+                images += `<img src=${entry} alt="dog${count}">`;
                 count++;
             });
-            //images += "<br>";
             variables = {
                 header: "Backyard",
                 results: images,
