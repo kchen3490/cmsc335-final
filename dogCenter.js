@@ -10,7 +10,7 @@ const app = express();  /* app is a request handler function */
 const bodyParser = require("body-parser"); /* To handle post parameters */
 const { type } = require("os");
 // const portNumber = process.argv[2];
-const localUrl = `https://dog-center.onrender.com`;
+const homeUrl = "https://dog-center.onrender.com";
 
 const publicPath = path.resolve(__dirname);
 app.use(express.static(publicPath));
@@ -109,7 +109,7 @@ app.get("/", (request, response) => {
 
 app.get("/register", (request, response) => {
     const variables = {
-        postUrl: localUrl + "/registerSuccess",
+        postUrl: homeUrl + "/registerSuccess",
         // homeUrl: localUrl,
     };
     response.render("register", variables);
@@ -129,7 +129,7 @@ app.post("/registerSuccess", (request, response) => {
 app.get("/adoption", (request, response) => { 
 	/* You implement */ 
     const variables = {
-        postUrl: localUrl + "/adoptionSuccess",
+        postUrl: homeUrl + "/adoptionSuccess",
         // homeUrl: localUrl,
     };
 
@@ -138,22 +138,7 @@ app.get("/adoption", (request, response) => {
 app.post("/adoptionSuccess", (request, response) => { 
     /* Notice how we are extracting the values from request.body */
     let name =  request.body;
-    //let statusCode = 200; // success!
 
-    //Add code to get the dog image and add that image to the array of the user
-    
-    //insertApp(name, email, gpa, bgInfo).catch(console.error); // MongoDB funtion!!
-
-    /*let answer = "<h1>Applicants Data</h1>";
-    answer += "<b>Name: </b>&nbsp" + name + "<br>";
-    answer += "<b>Email: </b>&nbsp" + email + "<br>";
-    answer += "<b>GPA: </b>&nbsp" + gpa + "<br>";
-    answer += "<b>Background Information: </b><br>" + bgInfo + "<br>";
-    answer += "<hr><b>Task completed at <!--#echo var=\"DATE_LOCAL\" --></b><hr>"; // rubric says this is not required
-    answer += "<a href=" + localUrl + ">HOME</a>";*/
-
-    //response.writeHead(statusCode, {"Content-type": "text/html"});
-    //response.end(answer);
     const variables = {
         header: "Adoption Status",
         results: "Adoption Process for 1 Random Dog Finished",
@@ -164,7 +149,7 @@ app.post("/adoptionSuccess", (request, response) => {
 /* The following two endpoints handle the Review Application pages */
 app.get("/backyard", (request, response) => {
     const variables = {
-        postUrl: localUrl + "/yourBackyard",
+        postUrl: homeUrl + "/yourBackyard",
         // homeUrl: localUrl,
     };
 
@@ -217,7 +202,7 @@ app.post("/yourBackyard", (request, response) => {
 /* The following two endpoints handle the 'Remove Applicants' pages */
 app.get("/returnDog", (request, response) => {
     const variables = {
-        postUrl: localUrl + "/processReturnDog",
+        postUrl: homeUrl+ "/processReturnDog",
         // homeUrl: localUrl,
     };
 
@@ -227,14 +212,7 @@ app.post("/processReturnDog", (request, response) => {
     async function remove() { 
         
         let numberRemoved = await removeAll(); // no need for client.connect() because it's in removeAll()
-        //let statusCode = 200; // success!
-
-       /* let answer = "<h1>Removal of All Applicants</h1><br>";
-        answer += "All Applications have been removed from the database. Number of applications removed: " + numberRemoved + "<br><br><br>";
-        answer += "<a href=" + localUrl + ">HOME</a>";*/
-
-        //response.writeHead(statusCode, {"Content-type": "text/html"});
-        //response.end(answer);
+  
         const variables = {
             header: "Remove All Users and Their Adopted Dogs",
             results: "All Applications have been removed from the database. Number of applications removed: " + numberRemoved + "<br><br><br>",
@@ -243,39 +221,3 @@ app.post("/processReturnDog", (request, response) => {
     }
     remove();
 });
-
-
-
-// /* Important */
-// app.listen(portNumber);
-// process.stdin.setEncoding("utf8");
-
-// /* Command Prompt - stops if incorrect num of arguments */
-// if (process.argv.length != 3) {
-//   process.stdout.write(`Usage dogCenter.js`);
-//   process.exit(1);
-// }
-
-// console.log(`Web server started and running at http://localhost:${portNumber}`);
-
-
-
-// /* Command Prompt stuff */
-// const prompt = "Stop to shutdown the server: ";
-// process.stdout.write(prompt);	// process.stdout.write writes the argument into the console
-// process.stdin.on("readable", function () {
-// 	const dataInput = process.stdin.read();	// stream for stdin like input() from Python
-// 	if (dataInput !== null) {
-// 		const command = dataInput.trim();
-
-// 	if (command === "stop") {
-// 		process.stdout.write("Shutting down the server\n");	// stream for stdout
-// 		process.exit(0);
-	
-// 	} else {
-// 		process.stdout.write(`Invalid command: ${command}\n`)
-// 	}
-// 	process.stdout.write(prompt);
-// 	process.stdin.resume();	// allows looping back to process.std.read() if invalid command
-// 	}
-// });
