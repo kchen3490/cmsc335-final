@@ -32,7 +32,7 @@ const uri = process.env.MONGO_CONNECTION_STRING;
 const databaseAndCollection = {db: "CMSC335DB", collection:"dogPhotos"};
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+const client = new MongoClient(uri, { serverApi: ServerApiVersion.v1 });
 
 /* MongoDB functions */
 /* For the Application pages */
