@@ -10,7 +10,7 @@ const app = express();  /* app is a request handler function */
 const bodyParser = require("body-parser"); /* To handle post parameters */
 const { type } = require("os");
 // const portNumber = process.argv[2];
-const homeUrl = "https://dog-center.onrender.com";
+const homeUrl = process.env.PORT || 4000;
 
 const publicPath = path.resolve(__dirname);
 app.use(express.static(publicPath));
