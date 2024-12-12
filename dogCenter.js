@@ -130,7 +130,7 @@ app.post("/adoptionSuccess", (request, response) => {
     answer += "<b>GPA: </b>&nbsp" + gpa + "<br>";
     answer += "<b>Background Information: </b><br>" + bgInfo + "<br>";
     answer += "<hr><b>Task completed at <!--#echo var=\"DATE_LOCAL\" --></b><hr>"; // rubric says this is not required
-    answer += "<a href=\"" + localUrl + "\">HOME</a>";
+    answer += "<a href=" + localUrl + ">HOME</a>";
 
     response.writeHead(statusCode, {"Content-type": "text/html"});
     response.end(answer);
@@ -166,7 +166,7 @@ app.post("/processPurchase", (request, response) => {
             answer += "<b>Email: </b>&nbsp" + email + "<br>";
             answer += "<b>GPA: </b>&nbsp" + gpa + "<br>";
             answer += "<b>Background Information: </b><br>" + bgInfo + "<br>";
-            answer += "<a href=\"" + localUrl + "\">HOME</a>";
+            answer += "<a href=" + localUrl + ">HOME</a>";
     
             response.writeHead(statusCode, {"Content-type": "text/html"});
             response.end(answer);
@@ -178,7 +178,7 @@ app.post("/processPurchase", (request, response) => {
             answer += "<b>Email: </b>&nbspNONE<br>";
             answer += "<b>GPA: </b>&nbspNONE<br>";
             answer += "<b>Background Information: </b><br>NONE<br>";
-            answer += "<a href=\"" + localUrl + "\">HOME</a>";
+            answer += "<a href=" + localUrl + ">HOME</a>";
     
             response.writeHead(statusCode, {"Content-type": "text/html"});
             response.end(answer);
@@ -206,7 +206,7 @@ app.post("/processReturnDog", (request, response) => {
 
         let answer = "<h1>Removal of All Applicants</h1><br>";
         answer += "All Applications have been removed from the database. Number of applications removed: " + numberRemoved + "<br><br><br>";
-        answer += "<a href=\"" + localUrl + "\">HOME</a>";
+        answer += "<a href=" + localUrl + ">HOME</a>";
 
         response.writeHead(statusCode, {"Content-type": "text/html"});
         response.end(answer);
