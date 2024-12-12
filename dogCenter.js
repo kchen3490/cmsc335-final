@@ -36,13 +36,13 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 
 /* MongoDB functions */
 /* For the Application pages */
-async function insertApp(name, email, gpa, bgInfo) {
+async function insertApp(name, email, age, addInfo) {
     try {
         await client.connect();
        
         /* Inserting one app */
         // console.log("***** Inserting one app *****");
-        let newApp = {name: name, email: email, gpa: gpa, bgInfo, bgInfo};
+        let newApp = {name: name, email: email, age: age, addInfo, addInfo};
         await insertAppHelper(client, databaseAndCollection, newApp);
 
     } catch (e) {
@@ -113,6 +113,16 @@ app.get("/register", (request, response) => {
         homeUrl: localUrl,
     };
     response.render("register", variables);
+});
+
+app.post("/registerSuccess", (request, response) => {
+    let {name, email, age, addInfo} = request.body;
+    insertApp(name, email, age, addInfo);
+    const variables = {
+        header: "Registration Status",
+        results: "Finished processing",
+    };
+    response.render("result", variables);
 });
 
 /* The following two endpoints handle the Application pages */
