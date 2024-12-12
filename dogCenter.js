@@ -217,36 +217,36 @@ app.post("/processReturnDog", (request, response) => {
 
 
 
-/* Important */
-app.listen(portNumber);
-process.stdin.setEncoding("utf8");
+// /* Important */
+// app.listen(portNumber);
+// process.stdin.setEncoding("utf8");
 
-/* Command Prompt - stops if incorrect num of arguments */
-if (process.argv.length != 3) {
-  process.stdout.write(`Usage dogCenter.js`);
-  process.exit(1);
-}
+// /* Command Prompt - stops if incorrect num of arguments */
+// if (process.argv.length != 3) {
+//   process.stdout.write(`Usage dogCenter.js`);
+//   process.exit(1);
+// }
 
-console.log(`Web server started and running at http://localhost:${portNumber}`);
+// console.log(`Web server started and running at http://localhost:${portNumber}`);
 
 
 
-/* Command Prompt stuff */
-const prompt = "Stop to shutdown the server: ";
-process.stdout.write(prompt);	// process.stdout.write writes the argument into the console
-process.stdin.on("readable", function () {
-	const dataInput = process.stdin.read();	// stream for stdin like input() from Python
-	if (dataInput !== null) {
-		const command = dataInput.trim();
+// /* Command Prompt stuff */
+// const prompt = "Stop to shutdown the server: ";
+// process.stdout.write(prompt);	// process.stdout.write writes the argument into the console
+// process.stdin.on("readable", function () {
+// 	const dataInput = process.stdin.read();	// stream for stdin like input() from Python
+// 	if (dataInput !== null) {
+// 		const command = dataInput.trim();
 
-	if (command === "stop") {
-		process.stdout.write("Shutting down the server\n");	// stream for stdout
-		process.exit(0);
+// 	if (command === "stop") {
+// 		process.stdout.write("Shutting down the server\n");	// stream for stdout
+// 		process.exit(0);
 	
-	} else {
-		process.stdout.write(`Invalid command: ${command}\n`)
-	}
-	process.stdout.write(prompt);
-	process.stdin.resume();	// allows looping back to process.std.read() if invalid command
-	}
-});
+// 	} else {
+// 		process.stdout.write(`Invalid command: ${command}\n`)
+// 	}
+// 	process.stdout.write(prompt);
+// 	process.stdin.resume();	// allows looping back to process.std.read() if invalid command
+// 	}
+// });
