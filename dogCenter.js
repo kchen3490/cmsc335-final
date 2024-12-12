@@ -9,7 +9,7 @@ const express = require("express");   /* Accessing express module */
 const app = express();  /* app is a request handler function */
 const bodyParser = require("body-parser"); /* To handle post parameters */
 const { type } = require("os");
-// const portNumber = process.argv[2]; // comment this out when you turn in on render
+const portNumber = process.argv[2];
 const homeUrl = process.env.PORT || 4000; // https://dog-center.onrender.com/
 
 const publicPath = path.resolve(__dirname);
@@ -221,7 +221,7 @@ app.post("/processReturnDog", (request, response) => {
 });
 
 /* Important */
-// app.listen(portNumber);
+app.listen(portNumber);
 process.stdin.setEncoding("utf8");
 
 /* Command Prompt - stops if incorrect num of arguments */
