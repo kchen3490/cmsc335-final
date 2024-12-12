@@ -11,7 +11,6 @@ const bodyParser = require("body-parser"); /* To handle post parameters */
 const { type } = require("os");
 const portNumber = process.argv[2];
 const homeUrl = process.env.PORT || 4000; // https://dog-center.onrender.com/
-
 const publicPath = path.resolve(__dirname);
 app.use(express.static(publicPath));
 
@@ -137,8 +136,24 @@ app.post("/adoptionSuccess", (request, response) => {
     /* Notice how we are extracting the values from request.body */
     async function adopt() {
         await client.connect();
-
-
+        let reqName =  request.body.name;
+        let result = await lookUpOneEntry(reqName);
+        let variables;
+        if (result != null) {
+            let {name, email, age, addInfo, dogs} = result;
+            const res = await fetch("https://dog.ceo/api/breeds/image/random");
+            const json = await res.json();
+            dogs.push(json.message);
+            variables = {
+                header: "Adoption Status",
+                results: "Adoption Process for 1 Random Dog Finished",
+            };
+        } else {
+            variables = {
+                header: "Adoption Status",
+                results: "Invalid User",
+            };
+        }
         /*try {
             let result = await lookUpOneEntry(reqName);
 
@@ -156,11 +171,6 @@ app.post("/adoptionSuccess", (request, response) => {
             response.end(answer);
         } catch (e) {}
         let name =  request.body;*/
-
-        const variables = {
-            header: "Adoption Status",
-            results: "Adoption Process for 1 Random Dog Finished",
-        };
         response.render("result", variables);
     }
     adopt();
@@ -177,16 +187,37 @@ app.get("/backyard", (request, response) => {
 });
 app.post("/yourBackyard", (request, response) => { 
     /* Notice how we are extracting the values from request.body */
-    let reqName =  request.body.name;
-    let statusCode = 200; // success!
+    
+    //let statusCode = 200; // success!
 
     // console.log("reqEmail is "+reqEmail);
 
     //MongoDB function!!
-    async function main() {
+    async function backyard() {
         await client.connect();
-
-        try {
+        let reqName = request.body.name;
+        let result = await lookUpOneEntry(reqName);
+        let variables;
+        if(result != null) {
+            let {name, email, age, addInfo, dogs} = result;
+            let images = "";
+            let count = 1;
+            dogs.forEach((entry) => {
+                images += `<img src=${entry} width="100" height="200" alt="dog${count}>`
+                count++;
+            });
+            variables = {
+                header: "Backyard",
+                results: images,
+            };
+        } else {
+            variables = {
+                header: "Backyard",
+                results: "Invalid User",
+            };
+        }
+        response.render("result", variables);
+        /*try {
             let result = await lookUpOneEntry(reqName);
 
             let {name, email, age, addInfo, dogs} = result;
@@ -214,9 +245,9 @@ app.post("/yourBackyard", (request, response) => {
             response.end(answer);
         } finally {
             await client.close();
-        }
-}
-    main();
+        }*/
+    }
+    backyard();
 });
 
 /* The following two endpoints handle the 'Remove Applicants' pages */
