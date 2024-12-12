@@ -112,7 +112,7 @@ app.get("/adoption", (request, response) => {
 	/* You implement */ 
     const variables = {
         postUrl: localUrl + "/adoptionSuccess",
-        homeUrl: "\"" + localUrl + "\"",
+        homeUrl: localUrl,
     };
 
     response.render("adoption", variables);
@@ -140,7 +140,7 @@ app.post("/adoptionSuccess", (request, response) => {
 app.get("/backyard", (request, response) => {
     const variables = {
         postUrl: localUrl + "/processPurchase",
-        homeUrl: "\"" + localUrl + "\"",
+        homeUrl: localUrl,
     };
 
     response.render("backyard", variables);
@@ -193,7 +193,7 @@ app.post("/processPurchase", (request, response) => {
 app.get("/returnDog", (request, response) => {
     const variables = {
         postUrl: localUrl + "/processReturnDog",
-        homeUrl: "\"" + localUrl + "\"",
+        homeUrl: localUrl,
     };
 
     response.render("returnDog", variables);
