@@ -9,8 +9,8 @@ const express = require("express");   /* Accessing express module */
 const app = express();  /* app is a request handler function */
 const bodyParser = require("body-parser"); /* To handle post parameters */
 const { type } = require("os");
-const portNumber = process.argv[2];
-const localUrl = `http://localhost:${portNumber}`;
+// const portNumber = process.argv[2];
+const localUrl = `https://dog-center.onrender.com`;
 
 const publicPath = path.resolve(__dirname);
 app.use(express.static(publicPath));
