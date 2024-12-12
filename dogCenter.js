@@ -223,7 +223,7 @@ process.stdin.setEncoding("utf8");
 
 /* Command Prompt - stops if incorrect num of arguments */
 if (process.argv.length != 3) {
-  process.stdout.write(`Usage dogCatalog.js`);
+  process.stdout.write(`Usage dogCenter.js`);
   process.exit(1);
 }
 
