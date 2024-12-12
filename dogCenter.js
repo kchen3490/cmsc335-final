@@ -221,7 +221,7 @@ app.post("/processReturnDog", (request, response) => {
 });
 
 /* Important */
-app.listen(portNumber);
+// app.listen(portNumber);
 process.stdin.setEncoding("utf8");
 
 /* Command Prompt - stops if incorrect num of arguments */
