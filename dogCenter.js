@@ -138,20 +138,25 @@ app.get("/adoption", (request, response) => {
 app.post("/adoptionSuccess", (request, response) => { 
     /* Notice how we are extracting the values from request.body */
     let {name, email, gpa, bgInfo} =  request.body;
-    let statusCode = 200; // success!
+    //let statusCode = 200; // success!
 
     insertApp(name, email, gpa, bgInfo).catch(console.error); // MongoDB funtion!!
 
-    let answer = "<h1>Applicants Data</h1>";
+    /*let answer = "<h1>Applicants Data</h1>";
     answer += "<b>Name: </b>&nbsp" + name + "<br>";
     answer += "<b>Email: </b>&nbsp" + email + "<br>";
     answer += "<b>GPA: </b>&nbsp" + gpa + "<br>";
     answer += "<b>Background Information: </b><br>" + bgInfo + "<br>";
     answer += "<hr><b>Task completed at <!--#echo var=\"DATE_LOCAL\" --></b><hr>"; // rubric says this is not required
-    answer += "<a href=" + localUrl + ">HOME</a>";
+    answer += "<a href=" + localUrl + ">HOME</a>";*/
 
-    response.writeHead(statusCode, {"Content-type": "text/html"});
-    response.end(answer);
+    //response.writeHead(statusCode, {"Content-type": "text/html"});
+    //response.end(answer);
+    const variables = {
+        header: "Adoption Status",
+        results: "Adoption Process for 1 Random Dog Finished",
+    };
+    response.render("result", variables);
 });
 
 /* The following two endpoints handle the Review Application pages */
@@ -163,7 +168,7 @@ app.get("/backyard", (request, response) => {
 
     response.render("backyard", variables);
 });
-app.post("/processPurchase", (request, response) => { 
+app.post("/yourBackyard", (request, response) => { 
     /* Notice how we are extracting the values from request.body */
     let reqEmail =  request.body.email;
     let statusCode = 200; // success!
@@ -217,20 +222,24 @@ app.get("/returnDog", (request, response) => {
     response.render("returnDog", variables);
 });
 app.post("/processReturnDog", (request, response) => { 
-    async function main() { 
+    async function remove() { 
         
         let numberRemoved = await removeAll(); // no need for client.connect() because it's in removeAll()
-        let statusCode = 200; // success!
+        //let statusCode = 200; // success!
 
-        let answer = "<h1>Removal of All Applicants</h1><br>";
+       /* let answer = "<h1>Removal of All Applicants</h1><br>";
         answer += "All Applications have been removed from the database. Number of applications removed: " + numberRemoved + "<br><br><br>";
-        answer += "<a href=" + localUrl + ">HOME</a>";
+        answer += "<a href=" + localUrl + ">HOME</a>";*/
 
-        response.writeHead(statusCode, {"Content-type": "text/html"});
-        response.end(answer);
-
+        //response.writeHead(statusCode, {"Content-type": "text/html"});
+        //response.end(answer);
+        const variables = {
+            header: "Remove All Users and Their Adopted Dogs",
+            results: "All Applications have been removed from the database. Number of applications removed: " + numberRemoved + "<br><br><br>",
+        };
+        response.render("result", variables);
     }
-    main();
+    remove();
 });
 
 
