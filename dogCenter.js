@@ -56,8 +56,8 @@ async function insertAppHelper(client, databaseAndCollection, newApp) {
 }
 
 /* For the Review Application pages */
-async function lookUpOneEntry(appEmail) {
-    let filter = {email: appEmail};
+async function lookUpOneEntry(username) {
+    let filter = {name: username};
     const result = await client.db(databaseAndCollection.db)
                         .collection(databaseAndCollection.collection)
                         .findOne(filter);
@@ -172,7 +172,7 @@ app.get("/backyard", (request, response) => {
 });
 app.post("/yourBackyard", (request, response) => { 
     /* Notice how we are extracting the values from request.body */
-    let reqEmail =  request.body.email;
+    let reqName =  request.body.name;
     let statusCode = 200; // success!
 
     // console.log("reqEmail is "+reqEmail);
@@ -182,15 +182,15 @@ app.post("/yourBackyard", (request, response) => {
         await client.connect();
 
         try {
-            let result = await lookUpOneEntry(reqEmail);
+            let result = await lookUpOneEntry(reqName);
 
-            let {name, email, gpa, bgInfo} = result;
+            let {name, email, age, addInfo, dogs} = result;
     
             let answer = "<h1>Applicants Data</h1>";
             answer += "<b>Name: </b>&nbsp" + name + "<br>";
             answer += "<b>Email: </b>&nbsp" + email + "<br>";
-            answer += "<b>GPA: </b>&nbsp" + gpa + "<br>";
-            answer += "<b>Background Information: </b><br>" + bgInfo + "<br>";
+            answer += "<b>GPA: </b>&nbsp" + age + "<br>";
+            answer += "<b>Background Information: </b><br>" + addInfo + "<br>";
             answer += "<a href=" + localUrl + ">HOME</a>";
     
             response.writeHead(statusCode, {"Content-type": "text/html"});
