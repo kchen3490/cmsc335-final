@@ -137,13 +137,35 @@ app.get("/adoption", (request, response) => {
 });
 app.post("/adoptionSuccess", (request, response) => { 
     /* Notice how we are extracting the values from request.body */
-    let name =  request.body;
+    async function adopt() {
+        await client.connect();
 
-    const variables = {
-        header: "Adoption Status",
-        results: "Adoption Process for 1 Random Dog Finished",
-    };
-    response.render("result", variables);
+
+        /*try {
+            let result = await lookUpOneEntry(reqName);
+
+
+            let {name, email, age, addInfo, dogs} = result;
+    
+            let answer = "<h1>Applicants Data</h1>";
+            answer += "<b>Name: </b>&nbsp" + name + "<br>";
+            answer += "<b>Email: </b>&nbsp" + email + "<br>";
+            answer += "<b>GPA: </b>&nbsp" + age + "<br>";
+            answer += "<b>Background Information: </b><br>" + addInfo + "<br>";
+            answer += "<a href=\"/\">HOME</a>";
+    
+            response.writeHead(statusCode, {"Content-type": "text/html"});
+            response.end(answer);
+        } catch (e) {}
+        let name =  request.body;*/
+
+        const variables = {
+            header: "Adoption Status",
+            results: "Adoption Process for 1 Random Dog Finished",
+        };
+        response.render("result", variables);
+    }
+    adopt();
 });
 
 /* The following two endpoints handle the Review Application pages */
