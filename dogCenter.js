@@ -140,10 +140,13 @@ app.post("/adoptionSuccess", (request, response) => {
         let result = await lookUpOneEntry(reqName);
         let variables;
         if (result != null) {
-            let {name, email, age, addInfo, dogs} = result;
             const res = await fetch("https://dog.ceo/api/breeds/image/random");
             const json = await res.json();
-            dogs.push(json.message);
+            const update = await client.db(databaseAndCollection.db)
+            .collection(databaseAndCollection.collection).updateOne(
+                {name: reqName},
+                {$push: {dogs: json.message} }
+            );
             variables = {
                 header: "Adoption Status",
                 results: "Adoption Process for 1 Random Dog Finished",
@@ -203,9 +206,10 @@ app.post("/yourBackyard", (request, response) => {
             let images = "";
             let count = 1;
             dogs.forEach((entry) => {
-                images += `<img src=${entry} width="100" height="200" alt="dog${count}>`
+                images += `<img src=${entry} alt="dog${count}><br>`;
                 count++;
             });
+            //images += "<br>";
             variables = {
                 header: "Backyard",
                 results: images,
