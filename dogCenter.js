@@ -110,7 +110,7 @@ app.get("/", (request, response) => {
 app.get("/register", (request, response) => {
     const variables = {
         postUrl: localUrl + "/registerSuccess",
-        homeUrl: localUrl,
+        // homeUrl: localUrl,
     };
     response.render("register", variables);
 });
@@ -130,7 +130,7 @@ app.get("/adoption", (request, response) => {
 	/* You implement */ 
     const variables = {
         postUrl: localUrl + "/adoptionSuccess",
-        homeUrl: localUrl,
+        // homeUrl: localUrl,
     };
 
     response.render("adoption", variables);
@@ -165,7 +165,7 @@ app.post("/adoptionSuccess", (request, response) => {
 app.get("/backyard", (request, response) => {
     const variables = {
         postUrl: localUrl + "/yourBackyard",
-        homeUrl: localUrl,
+        // homeUrl: localUrl,
     };
 
     response.render("backyard", variables);
@@ -191,7 +191,7 @@ app.post("/yourBackyard", (request, response) => {
             answer += "<b>Email: </b>&nbsp" + email + "<br>";
             answer += "<b>GPA: </b>&nbsp" + age + "<br>";
             answer += "<b>Background Information: </b><br>" + addInfo + "<br>";
-            answer += "<a href=" + localUrl + ">HOME</a>";
+            answer += "<a href=\"/\">HOME</a>";
     
             response.writeHead(statusCode, {"Content-type": "text/html"});
             response.end(answer);
@@ -203,7 +203,7 @@ app.post("/yourBackyard", (request, response) => {
             answer += "<b>Email: </b>&nbspNONE<br>";
             answer += "<b>GPA: </b>&nbspNONE<br>";
             answer += "<b>Background Information: </b><br>NONE<br>";
-            answer += "<a href=" + localUrl + ">HOME</a>";
+            answer += "<a href=\"/\">HOME</a>";
     
             response.writeHead(statusCode, {"Content-type": "text/html"});
             response.end(answer);
@@ -218,7 +218,7 @@ app.post("/yourBackyard", (request, response) => {
 app.get("/returnDog", (request, response) => {
     const variables = {
         postUrl: localUrl + "/processReturnDog",
-        homeUrl: localUrl,
+        // homeUrl: localUrl,
     };
 
     response.render("returnDog", variables);
