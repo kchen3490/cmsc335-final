@@ -9,8 +9,8 @@ const express = require("express");   /* Accessing express module */
 const app = express();  /* app is a request handler function */
 const bodyParser = require("body-parser"); /* To handle post parameters */
 const { type } = require("os");
-// const portNumber = process.argv[2];
-const homeUrl = process.env.PORT || 4000;
+const portNumber = process.argv[2];
+const homeUrl = process.env.PORT || 4000; // https://dog-center.onrender.com/
 
 const publicPath = path.resolve(__dirname);
 app.use(express.static(publicPath));
@@ -110,7 +110,6 @@ app.get("/", (request, response) => {
 app.get("/register", (request, response) => {
     const variables = {
         postUrl: homeUrl + "/registerSuccess",
-        // homeUrl: localUrl,
     };
     response.render("register", variables);
 });
@@ -130,7 +129,6 @@ app.get("/adoption", (request, response) => {
 	/* You implement */ 
     const variables = {
         postUrl: homeUrl + "/adoptionSuccess",
-        // homeUrl: localUrl,
     };
 
     response.render("adoption", variables);
@@ -242,4 +240,38 @@ app.post("/processReturnDog", (request, response) => {
         response.render("result", variables);
     }
     remove();
+});
+
+/* Important */
+app.listen(portNumber);
+process.stdin.setEncoding("utf8");
+
+/* Command Prompt - stops if incorrect num of arguments */
+// if (process.argv.length != 3) {
+//   process.stdout.write(`Usage supermarketServer.js portNum`);
+//   process.exit(1);
+// }
+
+console.log(`Web server started and running at http://localhost:${portNumber}`);
+
+
+
+/* Command Prompt stuff */
+const prompt = "Stop to shutdown the server: ";
+process.stdout.write(prompt);	// process.stdout.write writes the argument into the console
+process.stdin.on("readable", function () {
+	const dataInput = process.stdin.read();	// stream for stdin like input() from Python
+	if (dataInput !== null) {
+		const command = dataInput.trim();
+
+	if (command === "stop") {
+		process.stdout.write("Shutting down the server\n");	// stream for stdout
+		process.exit(0);
+	
+	} else {
+		process.stdout.write(`Invalid command: ${command}\n`)
+	}
+	process.stdout.write(prompt);
+	process.stdin.resume();	// allows looping back to process.std.read() if invalid command
+	}
 });
