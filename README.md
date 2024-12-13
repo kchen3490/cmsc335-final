@@ -1,19 +1,11 @@
-# cmsc335-final
+**Submitted by:** Kai Chen (kaiichen)
 
-### Submitted by (TBD)
-**Submitted by:** Lindsey Song (lsong125) or Kai Chen (kaiichen)
-
-### Group Members
 **Group Members:** Lindsey Song (lsong125), Kai Chen (kaiichen)
 
-### App Description
-**App Description:** (insert cool one or two line description)
+**App Description:** Allows users to register, "adopt" (add) random dogs, store their registration and dogs, view their selected random dogs, and remove their user registration and return all the dogs "adopted"
 
-### YouTube Video Link
 **Youtube Video Link:** [YouTube Link](https://youtu.be/dQw4w9WgXcQ)
-
-### APIs 
+ 
 **APIs:** DogAPI (https://dog.ceo/dog-api/)
 
-### Contact Email:
 **Contact Email:** kaiichen@terpmail.umd.edu
