@@ -52,7 +52,7 @@ async function insertAppHelper(client, databaseAndCollection, newApp) {
     const result = await client.db(databaseAndCollection.db).collection(databaseAndCollection.collection).insertOne(newApp);
 }
 
-/* For the Review Application pages */
+/* For the finding the user for getting all the dogs or adding a new dog pages */
 async function lookUpOneEntry(username) {
     let filter = {name: username};
     const result = await client.db(databaseAndCollection.db)
@@ -99,7 +99,7 @@ app.post("/registerSuccess", (request, response) => {
     response.render("result", variables);
 });
 
-/* The following two endpoints handle the Application pages */
+/* The following two endpoints handle the Adoption pages */
 app.get("/adoption", (request, response) => { 
     response.render("adoption");
 });
@@ -167,7 +167,7 @@ app.post("/yourBackyard", (request, response) => {
     backyard();
 });
 
-/* The following two endpoints handle the 'Remove Applicants' pages */
+/* The following two endpoints handle the 'Return Dogs' pages */
 app.get("/returnDog", (request, response) => {
     response.render("returnDog");
 });
