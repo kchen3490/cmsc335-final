@@ -1,11 +1,9 @@
-<!-- DO NOT MODIFY THIS FILE -->
 <!doctype html>
 <html lang="en">
 
 <head>
 	<meta charset="utf-8" />
 	<title>Return Dogs</title>
-	<!-- <link rel="stylesheet" href="style.css" type="text/css"> -->
 	<style>
 		body {
 			background-color:lavender;
@@ -16,14 +14,14 @@
 <body>
 	<h1>Return All Dogs</h1>
 	<form action="/processReturnDog" method="post">
-		<input type="submit" value="Remove All Dogs">
+		<input type="submit" value="Remove All Dogs and Users">
 	</form>
 	<hr>
 	<a href="/">HOME</a>
 
     <script>
 		window.onsubmit = () => {
-			let msg = "Are you sure you want to remove all applications?";
+			let msg = "Are you sure you want to remove all registered users and dogs?";
 			return window.confirm(msg);
 		};
 	</script>
