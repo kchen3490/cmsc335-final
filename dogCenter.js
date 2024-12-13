@@ -86,10 +86,7 @@ app.get("/", (request, response) => {
 });
 
 app.get("/register", (request, response) => {
-    const variables = {
-        postUrl: homeUrl + "/registerSuccess",
-    };
-    response.render("register", variables);
+    response.render("register");
 });
 
 app.post("/registerSuccess", (request, response) => {
@@ -104,11 +101,7 @@ app.post("/registerSuccess", (request, response) => {
 
 /* The following two endpoints handle the Application pages */
 app.get("/adoption", (request, response) => { 
-    const variables = {
-        postUrl: homeUrl + "/adoptionSuccess",
-    };
-
-    response.render("adoption", variables);
+    response.render("adoption");
 });
 app.post("/adoptionSuccess", (request, response) => { 
     /* Notice how we are extracting the values from request.body */
@@ -142,11 +135,7 @@ app.post("/adoptionSuccess", (request, response) => {
 
 /* The following two endpoints handle the Review Application pages */
 app.get("/backyard", (request, response) => {
-    const variables = {
-        postUrl: homeUrl + "/yourBackyard",
-    };
-
-    response.render("backyard", variables);
+    response.render("backyard");
 });
 app.post("/yourBackyard", (request, response) => { 
     //MongoDB function!!
@@ -180,11 +169,7 @@ app.post("/yourBackyard", (request, response) => {
 
 /* The following two endpoints handle the 'Remove Applicants' pages */
 app.get("/returnDog", (request, response) => {
-    const variables = {
-        postUrl: homeUrl+ "/processReturnDog",
-    };
-
-    response.render("returnDog", variables);
+    response.render("returnDog");
 });
 app.post("/processReturnDog", (request, response) => { 
     async function remove() { 
