@@ -10,4 +10,4 @@
 
 **Contact Email:** kaiichen@terpmail.umd.edu
 
-**Render Website Link for Our Project** https://dog-center.onrender.com
+**Render Website Link for Our Project:** https://dog-center.onrender.com
