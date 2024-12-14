@@ -4,7 +4,7 @@
 
 **App Description:** Allows users to register, "adopt" (add) random dogs, store their registration and dogs, view their selected random dogs, and remove their user registration and return all the dogs "adopted"
 
-**Youtube Video Link:** [YouTube Link](https://youtu.be/NFjZl17ucqU)
+**Youtube Video Link:** https://youtu.be/NFjZl17ucqU
  
 **APIs:** DogAPI (https://dog.ceo/dog-api/)
 
